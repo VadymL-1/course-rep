@@ -11,23 +11,28 @@
 >> _sudo chown bob:bob /home/bob_ - передаємо права на директорію новому користувачу  
 >> _sudo chpasswd_ - задаємо пароль користувачу  
 
+Побачити що користувач успішно створений можна використовуючи команду *sudo tail -n -5  /etc/passwd*. Виконання команди можна побачити на наступному скірншоті: ![Screenshot](images/screenshot_01.png)
+
+За допомогою команди *sudo cat /etc/group | grep sudo* перевіряємо чи був користувач доданий до групи *sudo*: ![Screenshot](images/screenshot_02.png)
+
 Далі створюємо скрипт *change_hostname.sh*. Зробити це з терміналу можна наступним чином: 
 
 > _cd /home/bob_ - Щоб опинитись в необхідній дерикторії  
-> *printf '#!/bin/bash\nsudo hostnamectl set-hostname ubuntu22' > change_hostname.sh* - Ми виводимо інформацію з табуляцією і повідомляємо  системі що її потрібно зберегти у файл *change_hostname.sh*
+> *printf '#!/bin/bash\nsudo hostnamectl set-hostname ubuntu22' > change_hostname.sh* - Ми виводимо інформацію з табуляцією і повідомляємо  системі що її потрібно зберегти у файл *change_hostname.sh*. Перевіряємо що все створено коректно: ![Screenshot](images/screenshot_03.png)
+
 
 Наступним кроком передаємо права власності на файл новому користувачу та встановлюємо права запуску лише для нього:  
 >sudo chown bob:bob change_hostname.sh  
 >sudo chmod 700 change_hostname.sh
 
 Запускаємо сценарій наступним чином:  
-> *sudo -u bob -i* - Заходимо як користувач bob  
+> *sudo -u bob -i* - Заходимо як користувач bob залишаючись в поточній директорії  
 > *sudo  ./change_hostname.sh* - запускаємо скрипт  
 >(Додатково на цьому етапі можна перевірити чи хост змінився командою *hostnamectl*)
 
-Перезапускаємо систему командою *reboot* та спостерігаємо картину зі screenshot_01 після перезапуску: ![Screenshot](images/screenshot_01.png)
+Перезапускаємо систему командою *reboot* та спостерігаємо картину зі screenshot_01 після перезапуску: ![Screenshot](images/screenshot_04.png)
 
-Перевіряємо в термінал чи змінено хостнейм: ![Screenshot](images/screenshot_02.png)
+Перевіряємо в термінал чи змінено хостнейм: ![Screenshot](images/screenshot_05.png)
 
 Проводимо встановлення *ngnix* за допомогою наступної команди:  
 > _sudo apt install nginx_
@@ -35,9 +40,9 @@
 Перевіряємо чи сервіс запущено за допомогою команди   
 > _sudo systemctl status nginx --no-pager_
 
-Бачимо наступну картину що підтверджує коректне встановленя та запуск *ngnix*: ![Screenshot](images/screenshot_03.png)
+Бачимо наступну картину що підтверджує коректне встановленя та запуск *ngnix*: ![Screenshot](images/screenshot_06.png)
 
-Встановлюємо *net-tools* командою *sudo apt install net-tools* та дивимось які порти відкриті за допомогою команди *sudo netstat -tulpn | grep nginx*: ![Screenshot](images/screenshot_04.png)
+Встановлюємо *net-tools* командою *sudo apt install net-tools* та дивимось які порти відкриті за допомогою команди *sudo netstat -tulpn | grep nginx*: ![Screenshot](images/screenshot_07.png)
 
 **Додатково я створив файл-сценарій який створює автоматично користувача, файл сценарію для зміни імені хоста, запускає його, проводить встановлення *ngnix*, *net-tools* та виводить всю необхідну інформацію в консоль (тобто проводить всю роботу по цьому завданню окрім перезапуску і входу як новий користувач)**  
 > Пароль від створеного користувача bob який створений через сценарій **1**. 
