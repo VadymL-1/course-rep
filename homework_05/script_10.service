@@ -1,0 +1,12 @@
+[Unit]
+Description=Watch directory and process with adding .bash to new files
+After=default.target
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /home/vadym/script_10.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
