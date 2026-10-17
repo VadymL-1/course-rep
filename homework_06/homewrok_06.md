@@ -49,5 +49,8 @@ Configuration of debug file you can check here: [`configuration_for_debug`](./ss
 
 ![Task 4 result pub](./screenshots/connect_debug.png)
 
+>Here we can see that both services are active and listening ports 2222 and 3333
+
+![Task 4 result check](./screenshots/service_check.png)
 
 Thank you for checking and have a nice day
