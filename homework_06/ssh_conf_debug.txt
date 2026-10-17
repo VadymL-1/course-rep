@@ -1,0 +1,9 @@
+Port 3333
+ListenAddress 0.0.0.0
+
+PermitRootLogin no
+
+PubkeyAuthentication yes
+PasswordAuthentication yes
+KbdInteractiveAuthentication yes
+AuthenticationMethods any

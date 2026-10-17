@@ -1,0 +1,25 @@
+### Editing /etc/systemd/system/ssh.socket.d/override.conf
+### Anything between here and the comment below will become the contents of the drop-in file
+
+
+
+### Edits below this comment will be discarded
+
+
+### /usr/lib/systemd/system/ssh.socket
+# [Unit]
+# Description=OpenBSD Secure Shell server socket
+# Before=sockets.target ssh.service
+# ConditionPathExists=!/etc/ssh/sshd_not_to_be_run
+#
+ [Socket]
+  ListenStream= #required to override default port 22
+  ListenStream=0.0.0.0:2222
+  ListenStream=[::]:2222
+# BindIPv6Only=ipv6-only
+# Accept=no
+# FreeBind=yes
+#
+# [Install]
+# WantedBy=sockets.target
+# RequiredBy=ssh.service
